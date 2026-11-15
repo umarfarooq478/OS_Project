@@ -1,0 +1,27 @@
+{
+  "package": "Student",
+  "version": "5.1-style-only",
+  "stage1_marks": 20,
+  "stage2_marks": 30,
+  "files": {
+    "AOS_A1_Student_Brief.docx": "6e6279a694c7de94cd1c99c2213fb745c9d641a4706e9c10473209eea63bc891",
+    "README_START_HERE.md": "fb9291adbb657d84e0edf20a9b405cafc451da6c0b08042cb59aa939713f9a05",
+    "papers/eurosys16-final29.pdf": "c0d99ee07a3ec791e0e75b60a2834a6f46afb41c0959230aae4110d5321f9515",
+    "starter/a1_core.py": "8ef07d73d2677515ecff20d3e57c8b9d0ce87200aec553f3485c134d73580bcb",
+    "starter/aos_scheduler_framework.py": "c57a53294a50ae0a2f2c646ee85d833e21215238b0535bc93c0b586ada80f45b",
+    "starter/docx_check.py": "1bf6475ecd4707859269d4e96126222deb46c61f83ba31020280e75df94528f2",
+    "starter/student_cli.py": "dbe76301e1519667f5408a778f882c83f986190e70a706dbc7b92e9cf873ae34",
+    "starter/v3_schema.py": "249a5fa08a1b4c68236574da7f1a47e215bb0251aba75859988f672bb6a712fc",
+    "templates/analysis/contradictions.json": "813d6a2745abaf6bd657c3793acbdf6ebd410c0b600e1935b39442a9184af69d",
+    "templates/analysis/findings.json": "945d5be60edefe623704a3afef4c2431e402a8a8bf62aaf98722af45d939bb45",
+    "templates/analysis/limitations.json": "866ed5223f493b9843eb2e2a99211e2c188430d5752dd256c09f30873dae72d1",
+    "templates/analysis/stage2_discussion_note.docx": "165c0774b3954c77ad5adfdcf30f758d23b7a011bab16adf019b2843dd156f7d",
+    "templates/experiments/experiment_plan.json": "fba2245092454527fe6d586ec6b1c0d91a5bfee896b91923aaf70ea093c0c33e",
+    "templates/recommendation.json": "6e7b81fdd24ff9f14de8ffaf6de5872c1ed47a8c93ba8e399783662e87baf372",
+    "templates/research/hypotheses.json": "d047580daa4e935c0525fdb122e3a8e019c39008e13880eb01466e380ca305ca",
+    "templates/research/literature.csv": "7a6573533afc8bf46356a982f4a6aa45c8b3727c357c7460310c3e1c4bc4e5b1",
+    "templates/research/research_question.json": "125a24b8153a404fcfa72ea0839c80fad269deb4cc69cffc7ce71aebc3bb89db",
+    "templates/research/stage1_research_note.docx": "dcc56ba14742b64adc1a6798b5fccede8aba429107958ecc84a2f11703f75c60",
+    "AOS_A1_Student_Brief.pdf": "5765c36715a77b9989ab6cff2b529062e242e0e92c6814868df699697cb42149"
+  }
+}

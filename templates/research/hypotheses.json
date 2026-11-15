@@ -1,0 +1,33 @@
+{
+  "hypotheses": [
+    {
+      "id": "H01",
+      "condition": "WRITE YOUR precise tested condition",
+      "prediction": "WRITE YOUR expected comparison and metric direction",
+      "metric": "avg_response",
+      "mechanism": "WRITE YOUR technical reason",
+      "would_disprove": "WRITE YOUR measurable outcome that would refute the claim",
+      "source_ids": [
+        "R01",
+        "R03"
+      ],
+      "planned_contrast_ids": [
+        "K01"
+      ]
+    },
+    {
+      "id": "H02",
+      "condition": "WRITE YOUR other condition",
+      "prediction": "WRITE YOUR measurable prediction",
+      "metric": "makespan",
+      "mechanism": "WRITE YOUR technical reason",
+      "would_disprove": "WRITE YOUR outcome that would refute the claim",
+      "source_ids": [
+        "R02"
+      ],
+      "planned_contrast_ids": [
+        "K02"
+      ]
+    }
+  ]
+}

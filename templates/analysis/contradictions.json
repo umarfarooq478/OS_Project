@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "hypothesis_id": "H01",
+      "status": "inconclusive",
+      "finding_ids": [
+        "F01"
+      ],
+      "what_the_results_show": "WRITE YOUR support and challenge evidence; if none, explain the tested range",
+      "different_explanation": "WRITE YOUR alternative explanation",
+      "next_experiment": "WRITE YOUR follow-up experiment and expected diagnostic outcome",
+      "tested_contrast_ids": [
+        "K01"
+      ],
+      "comparison_with_original_prediction": "WRITE YOUR original prediction in plain English, show which measured result agrees or disagrees with it, and explain why"
+    },
+    {
+      "hypothesis_id": "H02",
+      "status": "inconclusive",
+      "finding_ids": [
+        "F02",
+        "F03"
+      ],
+      "what_the_results_show": "WRITE YOUR support and challenge evidence; do not invent a contradiction",
+      "different_explanation": "WRITE YOUR alternative explanation",
+      "next_experiment": "WRITE YOUR follow-up experiment and expected diagnostic outcome",
+      "tested_contrast_ids": [
+        "K02"
+      ],
+      "comparison_with_original_prediction": "WRITE YOUR original prediction in plain English, show which measured result agrees or disagrees with it, and explain why"
+    }
+  ]
+}

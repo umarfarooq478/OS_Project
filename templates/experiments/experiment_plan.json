@@ -1,0 +1,62 @@
+{
+  "schema": "AOS-A1-V5-1.0",
+  "student_experiment_id": "DEMO-0000",
+  "conditions": [
+    {
+      "id": "C01",
+      "arrival_change": "none",
+      "placement": "balanced",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 0
+    },
+    {
+      "id": "C02",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 0
+    },
+    {
+      "id": "C03",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 4
+    },
+    {
+      "id": "C04",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 4,
+      "migration_penalty": 0
+    }
+  ],
+  "contrasts": [
+    {
+      "id": "K01",
+      "condition_a": "C01",
+      "condition_b": "C02",
+      "changed_factor": "placement",
+      "why_this_test": "WRITE YOUR reason for changing only placement in this contrast"
+    },
+    {
+      "id": "K02",
+      "condition_a": "C02",
+      "condition_b": "C03",
+      "changed_factor": "migration_penalty",
+      "why_this_test": "WRITE YOUR reason for changing only migration penalty in this contrast"
+    },
+    {
+      "id": "K03",
+      "condition_a": "C02",
+      "condition_b": "C04",
+      "changed_factor": "quantum",
+      "why_this_test": "WRITE YOUR reason for changing only the RR quantum in this contrast"
+    }
+  ],
+  "design_reason": "WRITE YOUR overall plan: why did you pick these experiments and what would count against your hypothesis?"
+}

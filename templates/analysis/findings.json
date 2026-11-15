@@ -1,0 +1,52 @@
+{
+  "findings": [
+    {
+      "id": "F01",
+      "claim": "WRITE YOUR claim based on results",
+      "condition_a": "C01",
+      "policy_a": "global",
+      "condition_b": "C01",
+      "policy_b": "per_core",
+      "metric": "avg_response",
+      "observed_relation": "lower",
+      "mechanism": "WRITE YOUR mechanism based on your results",
+      "why_this_matters": "WRITE YOUR implication for scheduler choice",
+      "hypothesis_id": "H01",
+      "source_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "F02",
+      "claim": "WRITE YOUR second claim",
+      "condition_a": "C02",
+      "policy_a": "global",
+      "condition_b": "C02",
+      "policy_b": "per_core",
+      "metric": "makespan",
+      "observed_relation": "lower",
+      "mechanism": "WRITE YOUR mechanism based on your results",
+      "why_this_matters": "WRITE YOUR implication",
+      "hypothesis_id": "H02",
+      "source_ids": [
+        "R03"
+      ]
+    },
+    {
+      "id": "F03",
+      "claim": "WRITE YOUR third claim",
+      "condition_a": "C03",
+      "policy_a": "global",
+      "condition_b": "C02",
+      "policy_b": "global",
+      "metric": "makespan",
+      "observed_relation": "higher",
+      "mechanism": "WRITE YOUR mechanism based on your results",
+      "why_this_matters": "WRITE YOUR implication",
+      "hypothesis_id": "H02",
+      "source_ids": [
+        "R02"
+      ]
+    }
+  ]
+}

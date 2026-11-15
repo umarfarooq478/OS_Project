@@ -1,0 +1,7 @@
+{
+  "question": "WRITE YOUR focused research question about when one scheduling strategy performs better.",
+  "why_it_matters": "WRITE YOUR reason why this scheduling decision matters.",
+  "independent_variable": "migration_penalty",
+  "dependent_metric": "avg_response",
+  "scope_boundary": "WRITE YOUR clear scope: this teaching simulator does not model Linux task balancing."
+}

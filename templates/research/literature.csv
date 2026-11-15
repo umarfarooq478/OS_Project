@@ -1,0 +1,4 @@
+source_id,title,year,source_type,doi_or_url,location,finding,link_to_experiment
+R01,The Linux Scheduler: a Decade of Wasted Cores,2016,paper,https://doi.org/10.1145/2901318.2901326,WRITE YOUR section/page,WRITE YOUR research finding,WRITE YOUR link to your experiment
+R02,WRITE YOUR selected peer-reviewed paper title,2020,paper,WRITE YOUR DOI or publisher URL,WRITE YOUR section/page,WRITE YOUR research finding,WRITE YOUR link to your experiment
+R03,Linux Scheduler Domains,2026,documentation,https://docs.kernel.org/scheduler/sched-domains.html,WRITE YOUR section,WRITE YOUR documentation finding,WRITE YOUR link to your experiment
