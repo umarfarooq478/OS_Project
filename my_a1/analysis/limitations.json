@@ -3,16 +3,16 @@
     {
       "id": "L01",
       "kind": "model",
-      "limitation": "WRITE YOUR modeling limitation",
-      "effect_on_conclusion": "WRITE YOUR effect on the strength of your claim",
-      "better_test": "WRITE YOUR specific further test"
+      "limitation": "The simulator has no load balancing or work stealing for per_core and models migration as a fixed number of lost ticks. Real Linux (R01, R03) keeps per-core runqueues but periodically moves tasks between cores using a scheduling-domain hierarchy, and real migration cost depends on cache size, working set, shared caches and NUMA distance.",
+      "effect_on_conclusion": "The very poor per_core results under skew (F01, F02) show a worst case that a real balancer would largely remove, and the size of the global penalty effect (F03, F04) depends on the chosen flat cost. The results show the direction of the trade-off, not the real size of the effect on Linux.",
+      "better_test": "Add a third policy with per-core queues plus periodic or idle-time work stealing, and repeat C02/C03 to see whether it gets global's response time without global's migration cost."
     },
     {
       "id": "L02",
       "kind": "experiment",
-      "limitation": "WRITE YOUR experimental limitation",
-      "effect_on_conclusion": "WRITE YOUR effect on the strength of your claim",
-      "better_test": "WRITE YOUR specific further test"
+      "limitation": "Only one small configuration was tested: 4 cores, 12 short CPU-bound jobs, three seeds, migration penalty only 0 or 4, quantum only 2 or 4, and no arrival_change (compress or stretch) conditions. Jobs never block for I/O.",
+      "effect_on_conclusion": "The crossover in F05 is known only to lie somewhere between penalty 0 and 4, and with three seeds the results show consistent direction but not statistical confidence. Busier or lighter arrival patterns could change how often global migrates and how bad the per_core imbalance is.",
+      "better_test": "Run penalties 1, 2 and 6 and arrival_change compress and stretch for both balanced and skewed placement, with more seeds, to map where per_core starts to beat global."
     }
   ]
 }

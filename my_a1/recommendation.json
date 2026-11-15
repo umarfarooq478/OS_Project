@@ -1,17 +1,19 @@
 {
   "policy": "depends",
-  "decision": "WRITE YOUR scheduling recommendation",
-  "metric": "avg_response",
-  "when_it_applies": "WRITE YOUR conditions where it applies",
-  "when_not_to_use_it": "WRITE YOUR conditions where it may fail",
-  "reason": "WRITE YOUR evidence and explanation",
+  "decision": "Use the shared global queue when job placement may be uneven, and use fixed per-core queues only when the load can be split evenly in advance and migration is expensive.",
+  "metric": "makespan",
+  "when_it_applies": "Global: when jobs cannot be placed evenly ahead of time, since it gave 33.000 vs 42.667 ticks makespan under skew even with penalty 4 (F03) and kept response time at 0.889 vs 4.972 (F01). per_core: when placement is already balanced and moving a job costs several ticks, where it gave 20.000 vs 33.000 ticks (F05).",
+  "when_not_to_use_it": "Do not use per_core without a load balancer if load may become uneven (F01, F02). Do not use a plain global queue if migration is costly and the load is already balanced (F04, F05). These results come from a small teaching simulator and do not prove how a real Linux system will behave (L01, L02).",
+  "reason": "The best policy depends on which cost is larger: load imbalance or migration. Under skew, per_core leaves cores idle (F01) and is worse even after global pays a 4-tick migration cost (F03). Under balanced placement there is little imbalance to fix, so global's migrations are pure overhead and per_core wins (F04, F05). This agrees with R02 and explains why Linux uses per-core queues plus a load balancer (R01, R03).",
   "finding_ids": [
     "F01",
-    "F02"
+    "F03",
+    "F04",
+    "F05"
   ],
   "limitation_ids": [
     "L01",
     "L02"
   ],
-  "next_test": "WRITE YOUR next test before using this in a real OS"
+  "next_test": "Before using this in a real OS, test a per-core policy with work stealing and penalties 1 and 2 in the simulator, then measure real migration cost and run time with pinned (taskset) versus free threads on a Linux machine."
 }

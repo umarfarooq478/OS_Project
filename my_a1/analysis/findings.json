@@ -2,50 +2,86 @@
   "findings": [
     {
       "id": "F01",
-      "claim": "WRITE YOUR claim based on results",
+      "claim": "For per_core, average response time in C01 (balanced placement) is 0.889 ticks, lower than 4.972 ticks in C02 (skewed placement), about 5.6 times worse under skew. For global the value is 0.889 in both C01 and C02, so placement has no effect on the shared queue. In C02 per_core (4.972) is far worse than global (0.889).",
       "condition_a": "C01",
-      "policy_a": "global",
-      "condition_b": "C01",
+      "policy_a": "per_core",
+      "condition_b": "C02",
       "policy_b": "per_core",
       "metric": "avg_response",
       "observed_relation": "lower",
-      "mechanism": "WRITE YOUR mechanism based on your results",
-      "why_this_matters": "WRITE YOUR implication for scheduler choice",
+      "mechanism": "Skewed placement pins 9 of 12 jobs to core 0 (CPU demand per core in seed 0 is 40/7/2/8 instead of 14/14/15/14). per_core has no work stealing, so the jobs queue behind each other on core 0 while cores 1-3 finish and go idle; newly arriving jobs wait several RR rounds for their first slice. The global queue ignores the affinity value, so any free core takes the next job and placement cannot matter.",
+      "why_this_matters": "Without a load balancer a per-core design is not work-conserving and suffers the 'wasted cores' problem described by Lozi et al.; this is why Linux needs the scheduling-domain load balancer.",
+      "hypothesis_id": "H01",
+      "source_ids": [
+        "R01",
+        "R03"
+      ]
+    },
+    {
+      "id": "F02",
+      "claim": "Under skewed placement, per_core average response time with quantum 2 (C02) is 4.972 ticks, lower than 8.722 ticks with quantum 4 (C04). Global also rises, from 0.889 to 1.556, but stays far lower. Migrations in global fall from 13.333 to 3.667 per run with the larger quantum.",
+      "condition_a": "C02",
+      "policy_a": "per_core",
+      "condition_b": "C04",
+      "policy_b": "per_core",
+      "metric": "avg_response",
+      "observed_relation": "lower",
+      "mechanism": "On the overloaded core 0 every job ahead in the round-robin queue now keeps the core for up to 4 ticks instead of 2, so a newly arrived job waits longer before its first slice. A larger quantum also means fewer pre-emptions, which is why global migrates less often.",
+      "why_this_matters": "A longer time slice makes load imbalance more painful for interactive response on a per-core design, while it reduces migrations for a shared queue; the quantum interacts with the queue design.",
       "hypothesis_id": "H01",
       "source_ids": [
         "R01"
       ]
     },
     {
-      "id": "F02",
-      "claim": "WRITE YOUR second claim",
+      "id": "F03",
+      "claim": "For global under skewed placement, makespan with migration_penalty 0 (C02) is 17.667 ticks, lower than 33.000 ticks with penalty 4 (C03), an 87% increase. per_core makespan stays at 42.667 in both conditions and still makes global (33.000) the better policy in C03.",
       "condition_a": "C02",
       "policy_a": "global",
-      "condition_b": "C02",
-      "policy_b": "per_core",
+      "condition_b": "C03",
+      "policy_b": "global",
       "metric": "makespan",
       "observed_relation": "lower",
-      "mechanism": "WRITE YOUR mechanism based on your results",
-      "why_this_matters": "WRITE YOUR implication",
+      "mechanism": "In the shared queue a job pre-empted after its quantum is usually resumed on a different core (about 14 migrations per run), and each migration wastes 4 core ticks with no useful work: roughly 57 lost core-ticks spread over 4 cores, which matches the ~15 tick increase. per_core never migrates, so its makespan is fixed by core 0's demand (40/48/40 ticks).",
+      "why_this_matters": "Migration cost can almost double completion time for a shared queue, but when load is badly unbalanced fixing the imbalance is still worth more than the migration cost, as R02 predicts.",
       "hypothesis_id": "H02",
       "source_ids": [
+        "R02",
         "R03"
       ]
     },
     {
-      "id": "F03",
-      "claim": "WRITE YOUR third claim",
-      "condition_a": "C03",
+      "id": "F04",
+      "claim": "For global under balanced placement, makespan with migration_penalty 0 (C01) is 17.667 ticks, lower than 33.000 ticks with penalty 4 (C05). per_core stays at 20.000 ticks in both C01 and C05 because it never migrates.",
+      "condition_a": "C01",
       "policy_a": "global",
-      "condition_b": "C02",
+      "condition_b": "C05",
       "policy_b": "global",
       "metric": "makespan",
-      "observed_relation": "higher",
-      "mechanism": "WRITE YOUR mechanism based on your results",
-      "why_this_matters": "WRITE YOUR implication",
+      "observed_relation": "lower",
+      "mechanism": "The workload and the global schedule are the same as in F03 (global ignores placement), so the same migrations happen and each one costs 4 lost ticks. per_core's balanced placement uses a known-burst offline assignment, so it has no imbalance and nothing to lose from the penalty.",
+      "why_this_matters": "The penalty is pure overhead for the shared queue when there is no imbalance for it to correct.",
       "hypothesis_id": "H02",
       "source_ids": [
-        "R02"
+        "R02",
+        "R03"
+      ]
+    },
+    {
+      "id": "F05",
+      "claim": "In C05 (balanced placement, penalty 4), per_core makespan is 20.000 ticks, lower than global's 33.000 ticks. This reverses C01 (penalty 0), where global (17.667) beat per_core (20.000), so the better policy flips when migration becomes expensive and load is already balanced.",
+      "condition_a": "C05",
+      "policy_a": "per_core",
+      "condition_b": "C05",
+      "policy_b": "global",
+      "metric": "makespan",
+      "observed_relation": "lower",
+      "mechanism": "With balanced placement per_core is close to the ideal 4-core split, so the only gain global offered in C01 was a small amount of extra flexibility (2.3 ticks). A 4-tick migration cost on about 14 migrations per run is much larger than that gain, so keeping jobs on their own core wins.",
+      "why_this_matters": "Neither policy wins everywhere: per-core affinity is best when load is even and migration is costly, and a shared queue is best when load is uneven, matching the trade-off in R02.",
+      "hypothesis_id": "H02",
+      "source_ids": [
+        "R02",
+        "R03"
       ]
     }
   ]
