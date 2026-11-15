@@ -1,0 +1,77 @@
+{
+  "schema": "AOS-A1-V5-1.0",
+  "student_experiment_id": "26i7832",
+  "conditions": [
+    {
+      "id": "C01",
+      "arrival_change": "none",
+      "placement": "balanced",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 0
+    },
+    {
+      "id": "C02",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 0
+    },
+    {
+      "id": "C03",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 4
+    },
+    {
+      "id": "C04",
+      "arrival_change": "none",
+      "placement": "skewed",
+      "concentration": null,
+      "quantum": 4,
+      "migration_penalty": 0
+    },
+    {
+      "id": "C05",
+      "arrival_change": "none",
+      "placement": "balanced",
+      "concentration": null,
+      "quantum": 2,
+      "migration_penalty": 4
+    }
+  ],
+  "contrasts": [
+    {
+      "id": "K01",
+      "condition_a": "C01",
+      "condition_b": "C02",
+      "changed_factor": "placement",
+      "why_this_test": "Only placement changes (balanced to skewed); jobs, arrivals, quantum 2 and penalty 0 stay the same. This tests H01: per_core cannot move work away from overloaded core 0, so its avg_response should rise, while global ignores placement and should not change. It isolates load imbalance with no migration cost involved."
+    },
+    {
+      "id": "K02",
+      "condition_a": "C02",
+      "condition_b": "C03",
+      "changed_factor": "migration_penalty",
+      "why_this_test": "Only migration_penalty changes (0 to 4) under skewed placement; jobs, quantum and arrivals are fixed. This tests H02: global should lose time to migrations and its makespan should grow, while per_core never migrates and should be unchanged. It shows whether a high migration cost can cancel global's advantage when the load is unbalanced."
+    },
+    {
+      "id": "K03",
+      "condition_a": "C02",
+      "condition_b": "C04",
+      "changed_factor": "quantum",
+      "why_this_test": "Only the RR quantum changes (2 to 4) under skewed placement with penalty 0. This is a secondary check for H01: with a longer quantum each job in core 0's long queue holds the core longer, so per_core response time should get worse; global should also migrate less often because jobs are requeued less often."
+    },
+    {
+      "id": "K04",
+      "condition_a": "C01",
+      "condition_b": "C05",
+      "changed_factor": "migration_penalty",
+      "why_this_test": "Only migration_penalty changes (0 to 4) under balanced placement, the best case for per_core. This tests the second part of H02: when there is no imbalance to fix, migrations are pure overhead for global, so global's makespan should rise to the level of per_core or above, giving a crossover point."
+    }
+  ],
+  "design_reason": "C01 and C02 are the fixed reference pair. Each comparison changes exactly one input so that any difference can be linked to that input, and every condition uses the same three seeded workloads for both global and per_core. K01 isolates load imbalance (H01). K02 and K04 isolate migration cost under skewed and balanced placement (H02), so we can see whether the winner depends on imbalance versus migration cost, the trade-off described in R01, R02 and R03. K03 checks the quantum as a secondary factor for response time. Evidence against the hypotheses would be: per_core response not clearly worse under skew (H01), or global makespan not increasing with penalty, per_core changing with penalty, or global still clearly winning under balanced placement with penalty 4 (H02)."
+}

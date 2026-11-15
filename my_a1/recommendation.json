@@ -1,0 +1,17 @@
+{
+  "policy": "depends",
+  "decision": "WRITE YOUR scheduling recommendation",
+  "metric": "avg_response",
+  "when_it_applies": "WRITE YOUR conditions where it applies",
+  "when_not_to_use_it": "WRITE YOUR conditions where it may fail",
+  "reason": "WRITE YOUR evidence and explanation",
+  "finding_ids": [
+    "F01",
+    "F02"
+  ],
+  "limitation_ids": [
+    "L01",
+    "L02"
+  ],
+  "next_test": "WRITE YOUR next test before using this in a real OS"
+}

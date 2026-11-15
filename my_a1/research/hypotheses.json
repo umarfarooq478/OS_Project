@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "H01",
+      "condition": "Compare C01 (balanced placement, quantum 2, migration_penalty 0, no arrival change) with C02 (skewed placement: 9 of 12 jobs pinned to core 0, all other inputs identical). Main policy of interest is per_core; global is reported as a control. K03 (C02 vs C04, quantum 2 vs 4) is a secondary check under skewed placement.",
+      "prediction": "For per_core, avg_response in C02 (skewed) will be clearly higher than in C01 (balanced), by at least 25%, because most jobs wait on core 0. For global, avg_response will be about the same in C01 and C02 (difference under 5%). In C02, per_core avg_response will be higher than global. In K03, a larger quantum (C04) will further raise per_core avg_response, since each job ahead in core 0's queue holds the core longer before a new job gets its first slice.",
+      "metric": "avg_response",
+      "mechanism": "per_core has no work stealing or periodic load balancing, so it is not work-conserving: cores 1-3 finish their few jobs and sit idle while core 0 still has a long round-robin queue. This is the 'wasted cores' symptom from R01 (Group Imbalance bug), and it is exactly what the Linux load balancer in R03 is designed to fix. The global queue ignores the affinity value, so any free core takes the next ready job and placement cannot hurt it.",
+      "would_disprove": "H01 is wrong if per_core avg_response in C02 is not clearly higher than in C01 (less than 25% higher, averaged over the three seeds), or if global avg_response changes noticeably (more than 5%) between C01 and C02, or if per_core is not worse than global in C02.",
+      "source_ids": [
+        "R01",
+        "R03"
+      ],
+      "planned_contrast_ids": [
+        "K01",
+        "K03"
+      ]
+    },
+    {
+      "id": "H02",
+      "condition": "Raise migration_penalty from 0 to 4 ticks while keeping placement, quantum and arrivals fixed: K02 compares C02 (skewed, penalty 0) with C03 (skewed, penalty 4); K04 compares C01 (balanced, penalty 0) with C05 (balanced, penalty 4). Main policy of interest is global; per_core is a control.",
+      "prediction": "For global, makespan will be higher in C03 than in C02 and higher in C05 than in C01. For per_core, makespan will be identical in each pair because per_core never migrates. Under balanced placement (C05) global's makespan will become equal to or worse than per_core's, but under skewed placement (C03) global will still have a lower makespan than per_core, because fixing the imbalance is worth more than the lost migration ticks.",
+      "metric": "makespan",
+      "mechanism": "In the global queue a job that is pre-empted at the end of its quantum is usually picked up by a different core, so it migrates often; each migration wastes penalty ticks on that core without useful work. R02 shows that when the reload (migration) cost is high, keeping affinity becomes valuable, but fixed assignment still loses when load is unbalanced. R03 explains that Linux avoids migrations across expensive domain boundaries for the same reason.",
+      "would_disprove": "H02 is wrong if global makespan does not increase from C02 to C03 or from C01 to C05, or if per_core makespan changes in either pair, or if global still has a clearly lower makespan than per_core in C05 (balanced, penalty 4), or if per_core has a lower makespan than global in C03.",
+      "source_ids": [
+        "R02",
+        "R03"
+      ],
+      "planned_contrast_ids": [
+        "K02",
+        "K04"
+      ]
+    }
+  ]
+}

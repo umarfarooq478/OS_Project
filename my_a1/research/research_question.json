@@ -1,0 +1,7 @@
+{
+  "question": "On a 4-core round-robin system, when does a fixed per-core queue (per_core) give better or worse average response time than a shared global queue (global), as initial job placement changes from balanced to skewed and as the cost of migrating a job between cores increases?",
+  "why_it_matters": "Real schedulers such as Linux CFS use per-core runqueues to avoid lock contention and keep caches warm, but Lozi et al. (R01) show that imperfect balancing leaves cores idle while jobs wait. Knowing which factor dominates - load imbalance or migration cost - tells a system designer when it is worth paying for migration and load balancing, and when keeping jobs on their core is the better choice.",
+  "independent_variable": "placement (balanced vs skewed) and migration_penalty (0 vs 4), each changed one at a time with quantum and arrivals fixed",
+  "dependent_metric": "avg_response",
+  "scope_boundary": "The study uses only the supplied teaching simulator: 4 cores, 12 synthetic CPU-bound jobs per workload, three seeds, round-robin with integer ticks. Migration cost is a fixed number of lost ticks. It does not model Linux task balancing, work stealing, caches, NUMA, I/O blocking or priorities, so results describe the simplified policies, not real Linux behaviour. Makespan and migrations are recorded as secondary metrics."
+}

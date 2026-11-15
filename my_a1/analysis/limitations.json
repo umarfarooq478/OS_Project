@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "id": "L01",
+      "kind": "model",
+      "limitation": "WRITE YOUR modeling limitation",
+      "effect_on_conclusion": "WRITE YOUR effect on the strength of your claim",
+      "better_test": "WRITE YOUR specific further test"
+    },
+    {
+      "id": "L02",
+      "kind": "experiment",
+      "limitation": "WRITE YOUR experimental limitation",
+      "effect_on_conclusion": "WRITE YOUR effect on the strength of your claim",
+      "better_test": "WRITE YOUR specific further test"
+    }
+  ]
+}

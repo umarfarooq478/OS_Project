@@ -1,0 +1,11 @@
+{
+  "schema": "AOS-A1-V5-1.0",
+  "student_experiment_id": "26i7832",
+  "design_files": {
+    "research/research_question.json": "e446b564db8af85108385bf2d17da29370cbe210c0c3ad636cae647129cc1b0c",
+    "research/hypotheses.json": "47cc218f9287477e23e6ff3f4c04326893ea76b3de93d207b19e36210f96cf85",
+    "experiments/experiment_plan.json": "500e90f6b88fc98a995242a356d7133a2be68a8442a42e7d827bbfe0aa941ace",
+    "research/literature.csv": "52c4983e1562909972937df5589ca197338e7880cf5188e2f6db7f81e1875cb3",
+    "research/stage1_research_note.docx": "4e2b38b27424acd323d1e839abe2110c4b7363a43f38662456edc3e7490f431a"
+  }
+}
